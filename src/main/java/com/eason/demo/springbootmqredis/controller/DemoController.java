@@ -16,7 +16,6 @@ public class DemoController {
     @GetMapping(value = "hello/{id}")
     public Demo hello(@PathVariable("id") Integer id) {
         Demo demo = demoService.selectById(id);
-
         return demo;
     }
 }

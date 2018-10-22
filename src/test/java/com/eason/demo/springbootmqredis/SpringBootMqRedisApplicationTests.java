@@ -1,8 +1,13 @@
 package com.eason.demo.springbootmqredis;
 
 import com.alibaba.druid.pool.ha.selector.DataSourceSelector;
+import com.eason.demo.springbootmqredis.po.Demo;
+import com.eason.demo.springbootmqredis.service.DemoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.ReceiveAndReplyMessageCallback;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,6 +32,12 @@ public class SpringBootMqRedisApplicationTests {
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    DemoService demoService;
+
     @Test
     public void contextLoads() {
         redisTemplate.opsForValue().set("demo", "hello");
@@ -43,5 +54,18 @@ public class SpringBootMqRedisApplicationTests {
         System.out.println(connection);
         connection.close();
     }
+
+    @Test
+    public void loadRabbitMQ() {
+        Demo demo = demoService.selectById(1);
+        rabbitTemplate.convertAndSend("ec.fanout", "rounting1", demo);
+    }
+
+    @Test
+    public void reciveRabbitMQ() {
+        Demo demo = (Demo) rabbitTemplate.receiveAndConvert("demo1");
+        System.out.println(demo);
+    }
+
 
 }

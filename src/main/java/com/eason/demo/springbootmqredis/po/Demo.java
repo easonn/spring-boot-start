@@ -49,4 +49,14 @@ public class Demo implements Serializable {
     public void setGender(Integer gender) {
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return "Demo{" +
+                "id=" + id +
+                ", remark='" + remark + '\'' +
+                ", realName='" + realName + '\'' +
+                ", gender=" + gender +
+                '}';
+    }
 }
