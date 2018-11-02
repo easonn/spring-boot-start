@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Demo implements Serializable {
     private Integer id;
     private String remark;
-    private String realName;
+    private String realName;  //real_name
     private Integer gender;
 
     public Demo(Integer id, String remark, String realName, Integer gender) {

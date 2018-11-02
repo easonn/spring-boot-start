@@ -8,11 +8,11 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @EnableRabbit
 @SpringBootApplication
-@EnableCaching
 @MapperScan("com.eason.demo.springbootmqredis.mapper")
 public class SpringBootMqRedisApplication {
 
     public static void main(String[] args) {
+//        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(SpringBootMqRedisApplication.class, args);
     }
 }
