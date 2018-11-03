@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-@RabbitListener(queues = {"demo1"})
+@RabbitListener(queues = {"demo"})
 public class KfService {
 
     @Autowired
